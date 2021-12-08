@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+        app: camilo_individual_project
+        tier: frontend
+  template:
+    metadata:
+      labels:
+        app: camilo_individual_project
+        tier: frontend
+    spec:
+      containers:
+      - name: frontend-couchdb
+        image: "jcagudelo/frontend-couchdb"
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort: 80

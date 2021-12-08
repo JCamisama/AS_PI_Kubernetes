@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-couchdb
+  labels:
+    app: couchdb
+    tier: backend
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 5984
+  selector:
+    app: couchdb
+    tier: backend

@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mi-volumen-persistente
+spec:
+  storageClassName: ""
+  claimRef:
+    name: mi-reclamacion-vp
+    namespace: default
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  gcePersistentDisk: 
+    fsType: "ext4" 
+    pdName: "diskoa"
+

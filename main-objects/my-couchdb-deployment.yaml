@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-couchdb
+  labels:
+    app: couchdb
+    tier: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: couchdb
+  template:
+    metadata:
+      labels:
+        app: couchdb
+        tier: backend
+    spec:
+      volumes:
+        - name: couchdb-volume
+          persistentVolumeClaim:
+            claimName: mi-reclamacion-vp
+      containers:
+      - name: my-couchdb
+        image: "jcagudelo/my-couchdb"
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort: 5984
+        volumeMounts:
+          - name: couchdb-volume
+            mountPath: /opt/couchdb/data
+            subPath: ./persistent/couchdb
